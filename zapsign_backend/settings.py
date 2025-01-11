@@ -1,8 +1,10 @@
-import os
+from decouple import config
 
-SECRET_KEY = 'key'
-DEBUG = True
-ALLOWED_HOSTS = []
+SECRET_KEY = config('SECRET_KEY', default='key')
+DEBUG = config('DEBUG', default=True, cast=bool)
+
+ZAPSIGN_API_URL = config('ZAPSIGN_API_URL', default='https://sandbox.api.zapsign.com.br/api/v1/docs/')
+ZAPSIGN_API_TOKEN = config('ZAPSIGN_API_TOKEN', default='')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -12,7 +14,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'documents',
+    'documents', 
 ]
 
 MIDDLEWARE = [
@@ -48,11 +50,11 @@ WSGI_APPLICATION = 'zapsign_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'zapsign_db',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': config('DB_NAME', default='zapsign_db'),
+        'USER': config('DB_USER', default=''),
+        'PASSWORD': config('DB_PASSWORD', default=''),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
 
@@ -79,4 +81,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ZAPSIGN_API_URL = 'https://sandbox.api.zapsign.com.br/api/v1/docs/'
+ZAPSIGN_API_URL = config('ZAPSIGN_API_URL', default='https://sandbox.api.zapsign.com.br/api/v1/docs/')
+ZAPSIGN_API_TOKEN = config('ZAPSIGN_API_TOKEN', default='')
+

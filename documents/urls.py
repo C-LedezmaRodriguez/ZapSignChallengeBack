@@ -8,5 +8,5 @@ router.register(r'documents', DocumentViewSet)
 router.register(r'signers', SignerViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]
